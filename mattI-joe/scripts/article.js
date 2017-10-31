@@ -35,9 +35,13 @@ Article.prototype.toHtml = function() {
 // COMMENT: Where is this function called? What does 'rawData' represent now? How is this different from previous labs?
 // The function is being called on line 50, within the fetchAll function.  rawData represents a parameter (placeholder) for the loadAll function that we are assuming to be a sortable array.
 Article.loadAll = rawData => {
-  rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
 
-  rawData.forEach(articleObject => Article.all.push(new Article(articleObject)))
+
+let parsed = JSON.parse(rawData);
+
+  parsed.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
+
+  parsed.forEach(articleObject => Article.all.push(new Article(articleObject)))
 }
 
 // REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
@@ -50,22 +54,43 @@ Article.fetchAll = () => {
     Article.loadAll(localStorage.getItem('rawData'));
 
     //TODO: What method do we call to render the index page?
-    Article.initIndexPage();
+    articleView.initIndexPage();
     // COMMENT: How is this different from the way we rendered the index page previously? What the benefits of calling the method here?
     // We are saving loading time by retrieving data from local storage now for every instance instead of having to retrive the data from the original source in every instance.
 
   } else {
     // TODO: When we don't already have the rawData:
     // - we need to retrieve the JSON file from the server with AJAX (which jQuery method is best for this?)
-    $.getJSON("./data/hackerIpsum.JSON", function() {
-      console.log('success');
-    })
-    // - we need to cache it in localStorage so we can skip the server call next time
+      // - we need to cache it in localStorage so we can skip the server call next time
     // - we then need to load all the data into Article.all with the .loadAll function above
     // - then we can render the index page
+    $.getJSON("./data/hackerIpsum.JSON", function(data) {
+
+        localStorage.setItem('rawData', JSON.stringify(data));
+        Article.loadAll(localStorage.getItem('rawData'));
+        articleView.initIndexPage();
+
+    });
+
+
+
+
+
+
+
+
+
+
 
 
     // COMMENT: Discuss the sequence of execution in this 'else' conditional. Why are these functions executed in this order?
     // PUT YOUR RESPONSE HERE
+
+    // The sequence of execution in the index page is so because it is the alternative to when the data was never previously loaded.
+    // The raw data item is retreieved, then added to local storage, then fetched from localStorage and rendered to the page with the .initIndexpage function.
+
+
+
+
   }
 }
