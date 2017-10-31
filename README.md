@@ -78,26 +78,29 @@ function(data, message, xhr) {
 _Your README.md must include:_
 
 ```md
-# Project Name
+# LAB: Ajax and JSON and WRRC
 
-**Author**: Your Name Goes Here
+**Author**: Matt I and Joe W
 **Version**: 1.0.0 (increment the patch/fix version number up if you make more commits past your first submission)
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code Fellows 301 class. (i.e. What's your problem domain?) -->
+We are getting adjusted to using the jquery abstracted version of Ajax requests in order to pull data and store it in local storage. If the page was previously visited, the data will be retrieved from localstorage, delivering optimal page load speed.
+
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+Initialize with a product such as live server in order to test in a proper dynamic page request fashion.
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+The scaffolding of this project separates concerns by storing style files in the style folder, scripts in the script folder, and data assets in the data folder. This keeps things organized and maintainable.
+
+
 
 ## Change Log
 <!-- Use this are to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
+No Changes here, we simply started from starter code given to us this morning. We worked on a development branch and changed computers half way through the projects process.
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with GET and POST routes for the book resource.
 
-## Credits and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
--->
 ```
