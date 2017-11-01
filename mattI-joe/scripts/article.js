@@ -37,7 +37,7 @@ Article.prototype.toHtml = function() {
 Article.loadAll = rawData => {
 
 
-let parsed = JSON.parse(rawData);
+  let parsed = JSON.parse(rawData);
 
   parsed.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
 
@@ -61,36 +61,22 @@ Article.fetchAll = () => {
   } else {
     // TODO: When we don't already have the rawData:
     // - we need to retrieve the JSON file from the server with AJAX (which jQuery method is best for this?)
-      // - we need to cache it in localStorage so we can skip the server call next time
+    // - we need to cache it in localStorage so we can skip the server call next time
     // - we then need to load all the data into Article.all with the .loadAll function above
     // - then we can render the index page
-    $.getJSON("./data/hackerIpsum.JSON", function(data) {
+    $.getJSON('./data/hackerIpsum.JSON', function(data) {
 
-        localStorage.setItem('rawData', JSON.stringify(data));
-        Article.loadAll(localStorage.getItem('rawData'));
-        articleView.initIndexPage();
+      localStorage.setItem('rawData', JSON.stringify(data));
+      Article.loadAll(localStorage.getItem('rawData'));
+      articleView.initIndexPage();
 
     });
-
-
-
-
-
-
-
-
-
-
-
 
     // COMMENT: Discuss the sequence of execution in this 'else' conditional. Why are these functions executed in this order?
     // PUT YOUR RESPONSE HERE
 
     // The sequence of execution in the index page is so because it is the alternative to when the data was never previously loaded.
     // The raw data item is retreieved, then added to local storage, then fetched from localStorage and rendered to the page with the .initIndexpage function.
-
-
-
 
   }
 }
